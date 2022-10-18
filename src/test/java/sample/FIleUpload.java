@@ -1,5 +1,6 @@
 package sample;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class FIleUpload {
     @Test
     public void fileUploadTest() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\sanchi\\Documents\\chromedriver\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/fileupload");
         driver.manage().window().maximize();

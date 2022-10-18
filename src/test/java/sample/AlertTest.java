@@ -1,5 +1,6 @@
 package sample;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -11,7 +12,7 @@ public class AlertTest {
 
     @Test
     public void testAlert(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\sanchi\\Documents\\chromedriver\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/switch-window");
         driver.manage().window().maximize();
