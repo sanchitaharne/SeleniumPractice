@@ -22,6 +22,13 @@ public class FillForm {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\sanchi\\Documents\\chromedriver\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/form");
+        submitForm(driver);
+        waitForAlertBanner(driver);
+        assertEquals("The form was successfully submitted!", getAlertBannerText(driver));
+        driver.quit();
+    }
+
+    public static void submitForm(WebDriver driver){
         driver.findElement(By.id("first-name")).sendKeys("sanchita");
         driver.findElement(By.id("last-name")).sendKeys("harne");
         driver.findElement(By.id("job-title")).sendKeys("qa engineer");
@@ -32,11 +39,15 @@ public class FillForm {
         driver.findElement(By.cssSelector("#datepicker")).sendKeys("05/02/2023");
         driver.findElement(By.cssSelector("#datepicker")).sendKeys(Keys.RETURN);
         driver.findElement(By.cssSelector(".btn.btn-lg.btn-primary")).click();
+
+    }
+    public static void waitForAlertBanner(WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-success")));
+   }
 
-        String alertText = driver.findElement(By.cssSelector(".alert.alert-success")).getText();
-        assertEquals("The form was successfully submitted!", alertText);
-        driver.quit();
+   public static String getAlertBannerText(WebDriver driver){
+
+       return driver.findElement(By.cssSelector(".alert.alert-success")).getText();
     }
 }
